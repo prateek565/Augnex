@@ -64,7 +64,7 @@
   //  8.681495,49.41461&end=8.687872,49.420318
 
     function loadPlaceFromAPIs(position, end) {
-      var endpoint = ` https://api.openrouteservice.org/v2/directions/driving-car?api_key=5b3ce3597851110001cf6248449df15745a3444cae6960e8202aa401&start=${position.longitude},${position.latitude}&end=${end.long},${end.lat}`;
+      var endpoint = ` https://api.openrouteservice.org/v2/directions/foot-walking?api_key=5b3ce3597851110001cf6248449df15745a3444cae6960e8202aa401&start=${position.longitude},${position.latitude}&end=${end.long},${end.lat}`;
       console.log(endpoint);
       return fetch(endpoint)
         .then(res => {
