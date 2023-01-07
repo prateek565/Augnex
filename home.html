@@ -49,6 +49,10 @@
   </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+
+
+  <!-- script for making api  req load places from api; -->
   <script>
     const loadPlaces = function (coords, end) {
       // console.log(end);
@@ -56,15 +60,18 @@
     };
 
     // getting places from REST APIs
+
+  //  8.681495,49.41461&end=8.687872,49.420318
+
     function loadPlaceFromAPIs(position, end) {
-      var endpoint = `https://api.openrouteservice.org/v2/directions/foot-walking?api_key=5b3ce3597851110001cf62487ff45692bdc34cdfbc509ce51f522ec0&start=${position.longitude},${position.latitude}&end=${end.long},${end.lat}`;
+      var endpoint = ` https://api.openrouteservice.org/v2/directions/driving-car?api_key=5b3ce3597851110001cf6248449df15745a3444cae6960e8202aa401&start=${position.longitude},${position.latitude}&end=${end.long},${end.lat}`;
       console.log(endpoint);
       return fetch(endpoint)
         .then(res => {
           return res.json().then(resp => {
             var data = [];
             data = data.concat(resp.features["0"].geometry.coordinates);
-            //   console.log(data);
+              console.log(data);
             return data;
           });
         })
@@ -73,101 +80,105 @@
         });
     }
   </script>
+
+
+
+<!-- script for drawpath from cur location to destinattion after modal data acceptedA -->
   <script>
-    var navbutton = [
-      {
-        name: "KR",
-        lat: 23.365088,
-        long: 85.253257
-      }
-    ];
     // var navbutton = [
     //   {
-    //     name: "Vishwakarma Hostel",
-    //     lat: 25.257578,
-    //     long: 82.985853
-    //   },
-    //   {
-    //     name: "Swatantrata Bhavan",
-    //     lat: 25.260576,
-    //     long: 82.993757
-    //   },
-    //   {
-    //     name: "ADV Grounds",
-    //     lat: 25.259153,
-    //     long: 82.989267
-    //   },
-    //   {
-    //     name: "LC",
-    //     lat: 25.260911,
-    //     long: 82.986833
-    //   },
-    //   {
-    //     name: "CCD",
-    //     lat: 25.258057,
-    //     long: 82.98686
-    //   },
-    //   {
-    //     name: "G1-G11",
-    //     lat: 25.262131,
-    //     long: 82.992954
-    //   },
-    //   {
-    //     name: "LT3",
-    //     lat: 25.260209,
-    //     long: 82.99055
-    //   },
-    //   {
-    //     name: "Technex Office",
-    //     lat: 25.261372,
-    //     long: 82.986774
-    //   },
-    //   {
-    //     name: "Hyderabad Gate",
-    //     lat: 25.262909,
-    //     long: 82.982231
-    //   },
-    //   {
-    //     name: "Visvesvaraya Hostel",
-    //     lat: 25.263038,
-    //     long: 82.983882
-    //   },
-    //   {
-    //     name: "Aryabhatta Hostel",
-    //     lat: 25.263944,
-    //     long: 82.984399
-    //   },
-    //   {
-    //     name: "ABLT",
-    //     lat: 25.263182,
-    //     long: 82.988691
-    //   },
-    //   {
-    //     name: "Vishwanath Temple",
-    //     lat: 25.26568,
-    //     long: 82.989624
-    //   },
-    //   {
-    //     name: "Library",
-    //     lat: 25.261804,
-    //     long: 82.989914
-    //   },
-    //   {
-    //     name: "Girls Hostel",
-    //     lat: 25.261037,
-    //     long: 82.98345
-    //   },
-    //   {
-    //     name: "SC Dey",
-    //     lat: 25.260237,
-    //     long: 82.987016
-    //   },
-    //   {
-    //     name: "Guest House",
-    //     lat: 25.26014,
-    //     long: 82.9848
+    //     name: "KR",
+    //     lat: 23.365088,
+    //     long: 85.253257
     //   }
     // ];
+    var navbutton = [
+      {
+        name: "Vishwakarma Hostel",
+        lat: 25.257578,
+        long: 82.985853
+      },
+      {
+        name: "Swatantrata Bhavan",
+        lat: 25.260576,
+        long: 82.993757
+      },
+      {
+        name: "ADV Grounds",
+        lat: 25.259153,
+        long: 82.989267
+      },
+      {
+        name: "LC",
+        lat: 25.260911,
+        long: 82.986833
+      },
+      {
+        name: "CCD",
+        lat: 25.258057,
+        long: 82.98686
+      },
+      {
+        name: "G1-G11",
+        lat: 25.262131,
+        long: 82.992954
+      },
+      {
+        name: "LT3",
+        lat: 25.260209,
+        long: 82.99055
+      },
+      {
+        name: "Technex Office",
+        lat: 25.261372,
+        long: 82.986774
+      },
+      {
+        name: "Hyderabad Gate",
+        lat: 25.262909,
+        long: 82.982231
+      },
+      {
+        name: "Visvesvaraya Hostel",
+        lat: 25.263038,
+        long: 82.983882
+      },
+      {
+        name: "Aryabhatta Hostel",
+        lat: 25.263944,
+        long: 82.984399
+      },
+      {
+        name: "ABLT",
+        lat: 25.263182,
+        long: 82.988691
+      },
+      {
+        name: "Vishwanath Temple",
+        lat: 25.26568,
+        long: 82.989624
+      },
+      {
+        name: "Library",
+        lat: 25.261804,
+        long: 82.989914
+      },
+      {
+        name: "Girls Hostel",
+        lat: 25.261037,
+        long: 82.98345
+      },
+      {
+        name: "SC Dey",
+        lat: 25.260237,
+        long: 82.987016
+      },
+      {
+        name: "Guest House",
+        lat: 25.26014,
+        long: 82.9848
+      }
+    ];
     $(window).on("load", () => {
       navbutton.forEach(button => {
         $(".modal-body").append(`<button
@@ -182,9 +193,11 @@
 
       function drawpath(end) {
         const scene = document.querySelector("a-scene");
+        // console.log(scene);
         return navigator.geolocation.getCurrentPosition(
           function (position) {
             loadPlaces(position.coords, end).then(places => {
+              console.log(places);
               places.forEach(place => {
                 const latitude = place[1];
                 const longitude = place[0];
@@ -200,7 +213,7 @@
               });
             });
           },
-          err => alert("Error in retrieving position"), // console.error(, err),
+          err => alert("Error in retrieving position" ), // console.error( err),
           {
             enableHighAccuracy: true,
             maximumAge: 0,
@@ -212,7 +225,7 @@
       $(".modal-body button").click(e => {
         $("#routes").modal("hide");
         $("a-image").remove();
-        //   console.log($(e.target).attr("lat"));
+          console.log($(e.target).attr("lat"));
         var end = {
           lat: $(e.target).attr("lat"),
           long: $(e.target).attr("long")
